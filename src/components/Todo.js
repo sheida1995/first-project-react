@@ -3,39 +3,70 @@ import "../App.css"
 
 const Todo = () => {
     const [inputData,setInputData]= useState('');
-    const [items, setItems]=useState([])
-    const addItem =()=>{
-        setItems(inputData);
+    const [items, setItems]=useState([]);
+
+
+    const addItem = () => {
+      if (!inputData){
+
+      }else {
+        setItems([...items, inputData]);
+        setInputData('')
+      } 
     }
+    const deleteItem = () => {
+      const updatedItems = items.filter((elem , ind) => {
+        return 
+
+      });
+      setItems(updatedItems);
+    }
+
+
+
+    const submitHandler =(e) =>{
+      e.preventDefault();
+    }
+    
   return (
     <>
     <h1>TODO LIST</h1>
     <section className="container">
       <div className="form-container">
-        <form className="todo-form">
+        <form className="todo-form" onSubmit={submitHandler}>
           <input type="text" placeholder='Add todo' className="todo-input" value={inputData}
           onChange={(e)=>setInputData(e.target.value)} />
           <button className="todo-button" type="submit">
-            <i className="fa-solid fa-square-plus" onClick={addItem}></i>
+            <i className="fa-solid fa-square-plus" title='add' onClick={addItem}></i>
           </button>
         </form>
 
-        <div class="select">
-          <select class="filter-todos" name="todos">
+        <div className="select">
+          <select className="filter-todos" name="todos">
             <option value="all">All</option>
             <option value="completed">Completed</option>
             <option value="uncompleted">Uncompleted</option>
           </select>
         </div>
       </div>
-      <div class="todo-container">
-        <ul class="todolist">
-        <li class="todo">
-        <p class="todo-title">work1</p>
-        <button class="check-button"><i class="fa-sharp fa-solid fa-check"></i></button>
-        <button class="trash-button"><i class="fa-solid fa-trash"></i></button>
+      <div className="todo-container">
+        {
+          items.map((elem, ind)=>{
+            return(
+<ul className="todo-list" key={ind}>
+        <li className="todo">
+        <p className="todo-title">{elem}</p>
+        <button className="check-button"><i className="fa-sharp fa-solid fa-check" ></i></button>
+        <button className="trash-button"><i className="fa-solid fa-trash" onClick={
+          () => deleteItem(ind)}></i></button>
       </li>
-        </ul>
+      </ul>
+            )
+          })
+
+        }
+        
+        
         </div>
       </section>
     </>
