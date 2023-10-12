@@ -146,6 +146,10 @@ select {
 .trash-button {
   background-color: var(--main-color);
 }
+/* check box */
+.strike {
+  text-decoration: line-through;
+}
 /* responsive */
 @media (max-width: 700px) {
     form input,
